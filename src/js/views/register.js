@@ -12,6 +12,7 @@ export const Register = () => {
 
     const handleChange = (event) => {
         setData(event.target.value)
+        console.log(event)
     }
 
     return(
@@ -29,24 +30,29 @@ export const Register = () => {
                 <div className="col-12">
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email</label>
-                        <input type="email" className="form-control" id="email" placeholder="Email"/>
+                        <input type="email" className="form-control" id="email" placeholder="Email" onChange={(event)=>{
+                            setData({...data, email: event.target.value})
+                        }}/>
                     </div>
                 </div>
                 <div className="col-12">
                     <div className="mb-3">
                         <label htmlFor="address" className="form-label">Address</label>
-                        <input type="text" className="form-control" id="address" placeholder="Address"/>
+                        <input type="text" className="form-control" id="address" placeholder="Address" onChange={(event)=>{
+                            setData({...data, address: event.target.value})
+                        }}/>
                     </div>
                 </div>
                 <div className="col-12">
                     <div className="mb-3">
                         <label htmlFor="phone" className="form-label">Phone</label>
-                        <input type="n" className="form-control" id="phone" placeholder="Phone Number"/>
+                        <input type="n" className="form-control" id="phone" placeholder="Phone Number" onChange={(event)=>{
+                            setData({...data, phone: event.target.value})
+                        }}/>
                     </div>
                 </div>
                 <div className="col-12">
                     <div className="mb-3">
-                        <label htmlFor="agenda_slug" className="form-label">Agenda</label>
                         <input type="hidden" className="form-control" id="agenda_slug" placeholder="Maria's Agenda" disabled/>
                     </div>
                 </div>
@@ -60,11 +66,3 @@ export const Register = () => {
 
 }
 
-/*
-        "address": "47568 NW 34ST, 33434 FL, USA",
-        "agenda_slug": "my_super_agenda",
-        "email": "dave@gmail.com",
-        "full_name": "Dave Bradley",
-        "id": 90917025568,
-        "phone": "7864445566"
-*/
