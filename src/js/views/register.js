@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const Register = () => {
 
+    const [data, setData] = useState({
+        name: "",
+        email:"",
+        address:"",
+        phone:"",
+        agenda_slug:"Maria's Agenda"
+    })
+
     const handleChange = (event) => {
-        console.log(event.target.value)
+        setData(event.target.value)
     }
 
     return(
@@ -13,7 +21,9 @@ export const Register = () => {
                 <div className="col-12">
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">Full Name</label>
-                        <input type="text" className="form-control" id="name" placeholder="Full Name" onChange={handleChange}/>
+                        <input type="text" className="form-control" id="name" placeholder="Full Name" onChange={(event)=>{
+                            setData({...data, name: event.target.value})
+                        }}/>
                     </div>
                 </div>
                 <div className="col-12">
@@ -37,7 +47,7 @@ export const Register = () => {
                 <div className="col-12">
                     <div className="mb-3">
                         <label htmlFor="agenda_slug" className="form-label">Agenda</label>
-                        <input type="text" className="form-control" id="agenda_slug" placeholder="Maria's Agenda" disabled/>
+                        <input type="hidden" className="form-control" id="agenda_slug" placeholder="Maria's Agenda" disabled/>
                     </div>
                 </div>
                 <div className="d-flex justify-content-center">
