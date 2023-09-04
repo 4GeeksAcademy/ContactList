@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contacts: [],
+			// contacts: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -40,15 +40,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 
-			loadContacts: () => {
+			// loadContacts: () => {
 
-				fetch("https://assets.breatheco.de/apis/fake/contact/agenda/Maria's_Agenda")
-					.then(response => response.json())
-					.then((response)=> {
-						console.log(response)
-						setStore({ contacts: response });
-				})
-			},
+			// 	fetch("https://assets.breatheco.de/apis/fake/contact/agenda/Maria's Agenda")
+			// 		.then(response => response.json())
+			// 		.then((response)=> {
+			// 			console.log(response)
+			// 			setStore({ contacts: response });
+			// 	})
+			// },
 		}
 	};
 };

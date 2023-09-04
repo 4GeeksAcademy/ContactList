@@ -1,46 +1,45 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-export const Register = () => {
 
-    const navigate = useNavigate()
+
+export const EditContact = () => {
+	const params = useParams();
+    const navigate = useNavigate();
     const [data, setData] = useState({
         full_name: "",
         email:"",
         address:"",
         phone:"",
-        agenda_slug:"Maria's Agenda"
+        agenda_slug:"Maria's Agenda",
     });
 
-    const handleChange = (event) => {
-        setData(event.target.value)
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        console.log(data)
-
-        const config = {
-            method: "POST", // or 'PUT'
-            body: JSON.stringify(data), // data can be `string` or {object}!
+	const editContact = (event)=>{
+		event.preventDefault();
+		fetch (`https://playground.4geeks.com/apis/fake/contact/${params.id}`, {
+            method: "PUT",
+            body: JSON.stringify(data),
             headers: {
-              "Content-Type": "application/json"
-            }
-        }    
-        
-        fetch("https://playground.4geeks.com/apis/fake/contact/", config)
-        .then((res) => res.json()) 
-        .catch((error) => console.error("Error:", error))    
-        .then((response) => navigate("/"));
-        
-    };
+                "Content-Type": "application/json"
+            }})
+            .then(response => {
+				if (response.status === 204) {
+				  alert("Contact edited successfully");
+				} else {
+				  alert("Failed to edit contact");
+				}
+			})
+			.catch(error => {
+				alert("An unexpected error occurred while editing contact");
+			});
+		  };
 
 
-    return(
+    return (
         <div className="container">
-            <div className="row">
-                <form onSubmit={handleSubmit}>            
-                    <h3 className="mb-3">Registro de Contactos</h3>
+            <div>
+                <form onSubmit={e => editContact(e)}>
+                <h3 className="mb-3">Editar Contacto</h3>
                     <div className="col-12">
                         <div className="mb-3">
                             <label htmlFor="name" className="form-label">Full Name</label>
@@ -74,13 +73,12 @@ export const Register = () => {
                         </div>
                     </div>
                     <div className="d-flex justify-content-center">
-                        <button className="btn btn-info col-5" type="submit">Registrar Contacto</button>
+                        <button className="btn btn-info col-5" type="submit">Guardar</button>
                     </div>
+                    <Link to="/">Get back</Link>
                 </form>
             </div>
         </div>
-        
-    )
+    );
 
-}
-
+};
