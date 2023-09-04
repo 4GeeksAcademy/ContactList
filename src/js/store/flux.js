@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			contacts: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -37,7 +38,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
+			},
+
+			loadContacts: () => {
+
+				fetch("https://assets.breatheco.de/apis/fake/contact/agenda/Maria's_Agenda")
+					.then(response => response.json())
+					.then((response)=> {
+						console.log(response)
+						setStore({ contacts: response });
+				})
+			},
 		}
 	};
 };
