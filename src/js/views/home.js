@@ -9,27 +9,28 @@ import { useEffect } from "react";
 export const Home = () => {
 
 	const [contacts, setContacts] = useState([])
-	const [task,setTask] = useState ([]);
+	// const [task,setTask] = useState ([]);
 	const navigate = useNavigate()
 	
 	useEffect(() => {
-		fetch ("https://playground.4geeks.com/apis/fake/contact/agenda/Maria's Agenda")
+		fetch ("https://playground.4geeks.com/apis/fake/contact/agenda/mariaAgenda")
 		.then(response => response.json())
 		.then(response => {
 			console.log(response)
 			setContacts(response)
 		})
-	}, [])
+	}, [contacts])
 
 		
-	// const deleteContact = (contact_id) => {
-	// 	const config = {
-	// 		method: "DELETE",
-	// 	}
-	// fetch (`https://playground.4geeks.com/apis/fake/contact/${contact_id}`, config)
-	// .then ((response)=> response.json())
-	// .then (response => console.log("success"))
-	// };
+	const deleteContact = (contact_id) => {
+	const config = {
+	method: "DELETE",
+	}
+	fetch (`https://playground.4geeks.com/apis/fake/contact/${contact_id}`, config)
+	.then ((response)=> response.json())
+	.then (response => console.log("success"))
+	.then (response => navigate("/"))
+	};
 
 
 
@@ -46,11 +47,11 @@ export const Home = () => {
 								<div className="row">
 									<h5 className="col-10 card-title contact-text mt-3" id="contact-tittle">{contact.full_name}</h5>
 									<div className="d-flex justify-content-end">
-										<i className="fas fa-times" onClick={()=> setTask(task.filter((t,currentIndex) => index != currentIndex))}></i>
+										{/* <i className="fas fa-times" onClick={()=> setTask(task.filter((t,currentIndex) => index != currentIndex))}></i> */}
+										<span className="col-1 m-0 p-0 " onClick={()=>deleteContact(contact.id)} ><i className="fas fa-times"></i></span>
 										<Link to={`/editContact/${contact.id}`} className="col-1 far fa-edit"></Link>									
 									</div>
 										
-									{/* <button className="col-1 fas fa-trash button-delete" onClick={() => {deleteContact(contact.id)}} ></button> */}
 								</div>
 								<p className="card-text contact-text"><i className="fas fa-map-marker-alt me-3"></i>{contact.address}</p>
 								<p className="card-text contact-text"><i className="fas fa-phone me-3"></i>{contact.phone}</p>

@@ -9,7 +9,7 @@ export const Register = () => {
         email:"",
         address:"",
         phone:"",
-        agenda_slug:"Maria's Agenda"
+        agenda_slug:"mariaAgenda"
     });
 
     const handleChange = (event) => {

@@ -11,24 +11,19 @@ export const EditContact = () => {
         email:"",
         address:"",
         phone:"",
-        agenda_slug:"Maria's Agenda",
+        agenda_slug:"mariaAgenda",
     });
 
-	const editContact = (event)=>{
-		event.preventDefault();
+	const editContact = ()=>{
+        event.preventDefault()
 		fetch (`https://playground.4geeks.com/apis/fake/contact/${params.id}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json"
             }})
-            .then(response => {
-				if (response.status === 204) {
-				  alert("Contact edited successfully");
-				} else {
-				  alert("Failed to edit contact");
-				}
-			})
+            .then(response => response.json())
+            .then(response => navigate("/") )
 			.catch(error => {
 				alert("An unexpected error occurred while editing contact");
 			});
@@ -38,7 +33,7 @@ export const EditContact = () => {
     return (
         <div className="container">
             <div>
-                <form onSubmit={e => editContact(e)}>
+                <form onSubmit={editContact}>
                 <h3 className="mb-3">Editar Contacto</h3>
                     <div className="col-12">
                         <div className="mb-3">
